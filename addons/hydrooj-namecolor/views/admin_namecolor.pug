@@ -1,0 +1,53 @@
+extends ../layout.pug
+
+block content
+  h1 用户和用户组颜色设置
+
+  if success
+    p(style="color:green") #{success}
+  if error
+    p(style="color:red") #{error}
+
+  form(method="post", action="/admin/namecolor")
+    label(for="username") 用户名或UID：
+    input#username(type="text", name="username", autocomplete="off", required, placeholder="输入用户名或UID")
+    ul#suggestion-list(style="border:1px solid #ccc;display:none;position:absolute;background:#fff;z-index:10;list-style:none;padding:0;margin:0;width:240px;max-height:150px;overflow:auto")
+    br
+    label(for="color-input") 颜色：
+    input#color-input(type="text", name="color", value="#000000", required)
+    input#color-picker(type="color", value="#000000")
+    br
+    span 预览效果：
+    span#preview(style="margin-left:8px;font-weight:bold") 示例用户名
+    br
+    button(type="submit") 修改颜色
+
+  hr
+  h2 当前用户颜色（点击颜色可直接修改）
+  table(border="1" cellspacing="0" cellpadding="5")
+    tr
+      th UID
+      th 用户名
+      th 当前颜色
+    each u in users
+      tr
+        td= u._id
+        td= u.username
+        td
+          input.user-color(type="color", value=u.name_color || '#000000', data-id=u._id, style="border:none;width:50px;height:25px;cursor:pointer")
+
+  hr
+  h2 用户组颜色（点击颜色可直接修改）
+  table(border="1" cellspacing="0" cellpadding="5")
+    tr
+      th 组ID
+      th 组名
+      th 当前颜色
+    each g in groups
+      tr
+        td= g._id
+        td= g.name
+        td
+          input.group-color(type="color", value=g.name_color || '#000000', data-id=g._id, style="border:none;width:50px;height:25px;cursor:pointer")
+
+  script(src="/addons/hydro-namecolor/frontend/colorpicker.js")
