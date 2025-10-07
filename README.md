@@ -1,4 +1,4 @@
-# 🌈 Hydro NameColor Pro v2.0
+# 🌈 Hydro NameColor Pro v1.0
 
 为 **HydroOJ v5.0.0-beta.9+** 打造的高级用户名颜色管理插件。  
 允许管理员为用户和用户组设置个性化的显示颜色，并支持实时预览、自动补全、内联编辑和批量设置。
